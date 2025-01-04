@@ -1,3 +1,3 @@
-export default function Home() {
-  return <p>Shirtology</p>;
+export default function Index() {
+  return <></>;
 }
