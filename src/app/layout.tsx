@@ -1,14 +1,17 @@
 import '@/assets/styles/globals.css';
-
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import { APP_TITLE, APP_DESCRIPTION, SERVER_URL } from '../lib/constants/index';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Shirtology',
-  description:
-    "Shop premium men's and women's shirts at Shirtology. From classic dress shirts to trendy casual styles, explore high-quality fabrics, perfect fits, and timeless designs. Elevate your wardrobe with our expertly crafted shirts today.",
+  title: {
+    template: `%s | Shirtology `,
+    default: APP_TITLE,
+  },
+  description: APP_DESCRIPTION,
+  metadataBase: new URL(SERVER_URL),
 };
 
 export default function RootLayout({
