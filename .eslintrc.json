@@ -9,6 +9,7 @@
   ],
   "plugins": ["@typescript-eslint", "simple-import-sort", "react"],
   "rules": {
+    "unicorn/filename-case": "off",
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": [
       "error",
