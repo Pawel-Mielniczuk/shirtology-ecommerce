@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { APP_TITLE } from '@/lib/constants';
 
 import { Button } from '../ui/button';
+import ModeToggle from './Mode-Toggle';
 
 export default function Header() {
   return (
@@ -25,6 +26,7 @@ export default function Header() {
           </Link>
         </div>
         <div className="space-x-2">
+          <ModeToggle />
           <Button asChild variant="ghost">
             <Link href="/cart">
               <ShoppingCart /> Cart
