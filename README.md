@@ -1,12 +1,10 @@
-This project is an e-commerce store built with Next.js. Its purpose is to help me learn and understand the core features of Next.js, including:
+This project is an e-commerce store built with Next.js. Its purpose is to help
+me learn and understand the core features of Next.js, including:
 
-Routing and route groups
-Application layouts
-Server-Side Rendering (SSR) and Client-Side Rendering (CSR)
-Data fetching and API integration
-The project emphasizes best practices such as performance optimization, code modularity, and proper setup of ESLint and Prettier.
-
-
+Routing and route groups Application layouts Server-Side Rendering (SSR) and
+Client-Side Rendering (CSR) Data fetching and API integration The project
+emphasizes best practices such as performance optimization, code modularity, and
+proper setup of ESLint and Prettier.
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with
 [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
