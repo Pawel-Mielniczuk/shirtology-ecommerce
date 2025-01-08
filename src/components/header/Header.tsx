@@ -7,6 +7,8 @@ import { APP_TITLE } from '@/lib/constants';
 import { Button } from '../ui/button';
 import ModeToggle from './Mode-Toggle';
 
+//TODO- Add Spinner for ModeToggle
+
 export default function Header() {
   return (
     <header className="w-full border-b">
