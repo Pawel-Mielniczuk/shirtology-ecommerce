@@ -1,7 +1,8 @@
 'use client';
-import { APP_TITLE } from '@/lib/constants';
 import Image from 'next/image';
+
 import { Button } from '@/components/ui/button';
+import { APP_TITLE } from '@/lib/constants';
 
 export default function NotFound() {
   return (
@@ -18,7 +19,7 @@ export default function NotFound() {
         <Button
           variant="outline"
           className="ml-2 mt-4"
-          onClick={() => (window.location.href = '/')}
+          onClick={() => (globalThis.location.href = '/')}
         >
           Back to Home
         </Button>
