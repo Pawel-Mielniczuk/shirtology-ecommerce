@@ -35,6 +35,15 @@ function setThemeIcon(theme: ThemeOption): ThemeSetter {
 
 export default function ModeToggle() {
   const { theme, setTheme } = useTheme();
+  const [isMounted, setIsMounted] = React.useState<boolean>(false);
+
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return null;
+  }
 
   return (
     <DropdownMenu>
