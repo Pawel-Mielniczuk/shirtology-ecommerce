@@ -1,3 +1,5 @@
+import ProductCard from './ProductCard';
+
 export default function ProductsList({ data, title }) {
   console.log({ data, title });
   return (
@@ -5,7 +7,7 @@ export default function ProductsList({ data, title }) {
       <h2 className="h2-bold mb-4">{title}</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {data.map(product => (
-          <div key={product.id}>{product.name}</div>
+          <ProductCard key={product.slug} product={product} />
         ))}
       </div>
     </div>
