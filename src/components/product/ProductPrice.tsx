@@ -1,4 +1,5 @@
 import { cx } from 'class-variance-authority';
+
 import { formatCurrency } from '@/lib/utils';
 
 export default function ProductPrice({ amount, className }) {
