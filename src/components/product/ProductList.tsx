@@ -1,7 +1,6 @@
 import ProductCard from './ProductCard';
 
 export default function ProductsList({ data, title }) {
-  console.log({ data, title });
   return (
     <div className="my-10">
       <h2 className="h2-bold mb-4">{title}</h2>
