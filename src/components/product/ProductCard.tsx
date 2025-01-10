@@ -26,7 +26,7 @@ export default function ProductCard({ product }) {
         <div className="flex-between gap-4">
           <p>{product.rating} stars</p>
           {product.stock > 0 ? (
-            <ProductPrice amount={Number(product.price)} />
+            <ProductPrice amount={product.price} />
           ) : (
             <p className="text-destructive">Out of stock</p>
           )}
