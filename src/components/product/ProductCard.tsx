@@ -1,10 +1,16 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { Product } from '@/types';
+
 import { Card, CardContent, CardHeader } from '../ui/card';
 import ProductPrice from './ProductPrice';
 
-export default function ProductCard({ product }) {
+type ProductCardProps = {
+  product: Product;
+};
+
+export default function ProductCard({ product }: ProductCardProps) {
   return (
     <Card className="w-full max-w-sm">
       <CardHeader className="items-center p-0">
