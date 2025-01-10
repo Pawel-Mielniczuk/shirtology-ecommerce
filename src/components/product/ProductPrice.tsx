@@ -8,5 +8,9 @@ type ProductPriceProps = {
 };
 
 export default function ProductPrice({ amount, className }: ProductPriceProps) {
-  return <p className={cx('text-2xl', className)}>{formatCurrency(amount)}</p>;
+  return (
+    <p className={cx('flex items-center justify-center text-2xl', className)}>
+      {formatCurrency(amount)}
+    </p>
+  );
 }
