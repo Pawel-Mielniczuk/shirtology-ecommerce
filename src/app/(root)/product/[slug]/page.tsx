@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
 
+import ProductImages from '@/components/product/ProductImages';
 import ProductPrice from '@/components/product/ProductPrice';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -17,7 +18,9 @@ export default async function ProductDetailPage(props: {
   return (
     <article>
       <div className="grid grid-cols-1 md:grid-cols-5">
-        <div className="col-span-2"></div>
+        <div className="col-span-2">
+          <ProductImages images={product.images} />
+        </div>
         <div className="col-span-2 p-5">
           <div className="flex flex-col gap-6">
             <p>
