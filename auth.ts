@@ -53,7 +53,7 @@ export const config = {
       },
     }),
   ],
-  callback: {
+  callbacks: {
     async session({ session, user, trigger, token }: any) {
       //set userId from token
       session.user.id = token.sub;
