@@ -11,6 +11,8 @@ import {
 } from '@/components/ui/card';
 import { APP_TITLE } from '@/lib/constants';
 
+import { SignInForm } from './sign-in-form';
+
 export const metadata: Metadata = {
   title: 'Sign In',
 };
@@ -34,7 +36,9 @@ export default function SignInPage() {
             Sign In to your account
           </CardDescription>
         </CardHeader>
-        <CardContent className="space-y-4"></CardContent>
+        <CardContent className="space-y-4">
+          <SignInForm />
+        </CardContent>
       </Card>
     </div>
   );
