@@ -5,10 +5,28 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { singInWithCredentials } from '@/lib/actions/user.action';
+import { useActionState } from 'react';
+import { useFormStatus } from 'react-dom';
 
 export function SignInForm() {
+  const [data, action] = useActionState(singInWithCredentials, {
+    success: false,
+    message: '',
+  });
+
+  function SignInButton() {
+    const { pending } = useFormStatus();
+
+    return (
+      <Button className="w-full" variant="default" aria-disabled={pending}>
+        {pending ? 'Signing In...' : 'Sign In'}
+      </Button>
+    );
+  }
+
   return (
-    <form>
+    <form action={action}>
       <div className="space-y-6">
         <div>
           <Label htmlFor="email">Email:</Label>
@@ -31,10 +49,13 @@ export function SignInForm() {
           />
         </div>
         <div>
-          <Button variant="default" className="w-full">
-            Sign In
-          </Button>
+          <SignInButton />
         </div>
+
+        {data && !data.success && (
+          <div className="text-center text-destructive">{data.message}</div>
+        )}
+
         <div className="text-center text-sm text-muted-foreground">
           Don&apos;t have account?{' '}
           <Link href="/sign-up" target="_self" className="link">

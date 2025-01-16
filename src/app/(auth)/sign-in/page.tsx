@@ -12,12 +12,20 @@ import {
 import { APP_TITLE } from '@/lib/constants';
 
 import { SignInForm } from './sign-in-form';
+import { auth } from '../../../../auth';
+import { redirect } from 'next/navigation';
 
 export const metadata: Metadata = {
   title: 'Sign In',
 };
 
-export default function SignInPage() {
+export default async function SignInPage() {
+  const session = await auth();
+
+  if (session) {
+    return redirect('/');
+  }
+
   return (
     <div className="mx-auto w-full max-w-md">
       <Card>
