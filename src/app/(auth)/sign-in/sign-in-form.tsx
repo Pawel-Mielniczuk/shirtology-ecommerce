@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 import { useActionState } from 'react';
 import { useFormStatus } from 'react-dom';
 
@@ -15,6 +16,9 @@ export function SignInForm() {
     message: '',
   });
 
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get('callbackUrl') || '/';
+
   function SignInButton() {
     const { pending } = useFormStatus();
 
@@ -27,6 +31,7 @@ export function SignInForm() {
 
   return (
     <form action={action}>
+      <input type="hidden" name="callbackUrl" value={callbackUrl} />
       <div className="space-y-6">
         <div>
           <Label htmlFor="email">Email:</Label>
