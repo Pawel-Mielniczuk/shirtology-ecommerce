@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 
 import {
   Card,
@@ -11,9 +12,8 @@ import {
 } from '@/components/ui/card';
 import { APP_TITLE } from '@/lib/constants';
 
-import { SignInForm } from './sign-in-form';
 import { auth } from '../../../../auth';
-import { redirect } from 'next/navigation';
+import { SignInForm } from './sign-in-form';
 
 export const metadata: Metadata = {
   title: 'Sign In',
