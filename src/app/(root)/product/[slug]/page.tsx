@@ -1,9 +1,9 @@
 import { notFound } from 'next/navigation';
 
+import AddToCart from '@/components/product/AddToCart';
 import ProductImages from '@/components/product/ProductImages';
 import ProductPrice from '@/components/product/ProductPrice';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { getProduct } from '@/lib/actions/product.action';
 
@@ -58,7 +58,16 @@ export default async function ProductDetailPage(props: {
                 </div>
                 {product.stock > 0 && (
                   <div className="flex-center">
-                    <Button className="w-full">Add to Cart</Button>
+                    <AddToCart
+                      item={{
+                        productId: product.id,
+                        name: product.name,
+                        slug: product.slug,
+                        price: product.price,
+                        quantity: 1,
+                        image: product.images![0],
+                      }}
+                    />
                   </div>
                 )}
               </CardContent>
