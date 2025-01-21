@@ -6,6 +6,7 @@ import { isRedirectError } from 'next/dist/client/components/redirect-error';
 import { prisma } from '@/db/prisma';
 
 import { signIn, signOut } from '../../../auth';
+import { formatError } from '../utils';
 import { signInSchema, signUpSchema } from '../validators';
 
 type SignInResult = {
@@ -69,6 +70,6 @@ export async function signUpUser(previousState: unknown, formData: FormData) {
     if (isRedirectError(error)) {
       throw error;
     }
-    return { success: false, message: 'User was not registered' };
+    return { success: false, message: formatError(error) };
   }
 }
