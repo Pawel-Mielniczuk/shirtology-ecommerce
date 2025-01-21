@@ -35,23 +35,11 @@ export function SignUpForm() {
       <div className="space-y-6">
         <div>
           <Label htmlFor="name">Name:</Label>
-          <Input
-            id="name"
-            name="name"
-            type="text"
-            required
-            autoComplete="name"
-          />
+          <Input id="name" name="name" type="text" autoComplete="name" />
         </div>
         <div>
           <Label htmlFor="email">Email:</Label>
-          <Input
-            id="email"
-            name="email"
-            type="email"
-            required
-            autoComplete="email"
-          />
+          <Input id="email" name="email" type="email" autoComplete="email" />
         </div>
         <div>
           <Label htmlFor="password">Password:</Label>
