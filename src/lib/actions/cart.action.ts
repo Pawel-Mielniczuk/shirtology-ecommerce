@@ -47,7 +47,6 @@ export async function addItemToCart(data: CartItem) {
       : undefined;
 
     const cart = await getMyCart();
-    console.log('cart', cart);
 
     // parse and validate Item
     const item = cartItemSchema.parse(data);
@@ -57,17 +56,48 @@ export async function addItemToCart(data: CartItem) {
       where: { id: item.productId },
     });
 
-    // console.log({
-    //   'Session Card Id': sessionCardId,
-    //   'User id': userId,
-    //   'Item requested': item,
-    //   'product found': product,
-    // });
-
     if (!product) {
       throw new Error('Product not found');
     }
-    if (!cart) {
+    if (cart) {
+      // Check if item is already in the cart
+      const itemExist = (cart.items as CartItem[]).find(
+        x => x.productId === item.productId,
+      );
+
+      if (itemExist) {
+        //check stock
+        if (product.stock < itemExist.quantity + 1) {
+          throw new Error('Not enough stock');
+        }
+        // increase quantity
+        const itemIndex = cart.items.findIndex(
+          x => x.productId === item.productId,
+        );
+        if (itemIndex !== -1) {
+          cart.items[itemIndex].quantity = itemExist.quantity + 1;
+        }
+      } else {
+        if (product.stock < 1) throw new Error('Not enough stock');
+
+        cart.items.push(item);
+      }
+      console.log('aktualizacja koszuka', cart);
+      await prisma.cart.update({
+        where: { id: cart.id },
+        data: {
+          items: cart.items,
+          ...calcPrice(cart.items),
+        },
+      });
+
+      revalidatePath(`/products/${product.slug}`);
+
+      return {
+        success: true,
+        message: `${product.name} ${itemExist ? 'Updated in' : 'added to'} cart`,
+      };
+    } else {
       // Create a new cart obj
       const newCart = insertCartSchema.parse({
         userId: userId,
@@ -86,7 +116,7 @@ export async function addItemToCart(data: CartItem) {
 
       return {
         success: true,
-        message: 'Item added to cart',
+        message: `${product.name} added to cart`,
       };
     }
   } catch (error) {
