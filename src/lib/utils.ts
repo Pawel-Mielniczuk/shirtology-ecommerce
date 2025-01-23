@@ -10,6 +10,16 @@ export function convertToPlainObject<T>(object: T): T {
   return JSON.parse(JSON.stringify(object));
 }
 
+export function round2(amount: number | string) {
+  if (typeof amount === 'number') {
+    return Math.round((amount + Number.EPSILON) * 100) / 100;
+  } else if (typeof amount === 'string') {
+    return Math.round((Number(amount) + Number.EPSILON) * 100) / 100;
+  } else {
+    throw new TypeError('Amount is not a number or string');
+  }
+}
+
 export function formatCurrency(amount: number = 0): string {
   const options: Intl.NumberFormatOptions = {
     style: 'currency',
