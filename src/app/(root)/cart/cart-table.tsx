@@ -1,11 +1,13 @@
 'use client';
 
-import { Loader, Minus, Plus } from 'lucide-react';
+import { ArrowRight, Loader } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useTransition } from 'react';
+import { useRouter } from 'next/navigation';
+import { startTransition, useTransition } from 'react';
 
 import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
 import {
   Table,
   TableBody,
@@ -19,8 +21,10 @@ import { addItemToCart, removeItemFromCart } from '@/lib/actions/cart.action';
 import { formatCurrency } from '@/lib/utils';
 import { Cart } from '@/types';
 
+import { QuantityButton } from './quantity-button';
+
 export function CartTable({ cart }: { cart?: Cart }) {
-  // const router = useRouter();
+  const router = useRouter();
   const { toast } = useToast();
   const [isPending, startTransiton] = useTransition();
   return (
@@ -59,10 +63,8 @@ export function CartTable({ cart }: { cart?: Cart }) {
                       </Link>
                     </TableCell>
                     <TableCell className="flex-center gap-2">
-                      <Button
-                        disabled={isPending}
-                        variant="outline"
-                        type="button"
+                      <QuantityButton
+                        isPending={isPending}
                         onClick={() => {
                           startTransiton(async () => {
                             const response = await removeItemFromCart(
@@ -77,18 +79,11 @@ export function CartTable({ cart }: { cart?: Cart }) {
                             }
                           });
                         }}
-                      >
-                        {isPending ? (
-                          <Loader className="h-4 w-4 animate-spin" />
-                        ) : (
-                          <Minus />
-                        )}
-                      </Button>
+                        isAddButton={false}
+                      />
                       <span>{item.quantity}</span>
-                      <Button
-                        disabled={isPending}
-                        variant="outline"
-                        type="button"
+                      <QuantityButton
+                        isPending={isPending}
                         onClick={() => {
                           startTransiton(async () => {
                             const response = await addItemToCart(item);
@@ -101,13 +96,8 @@ export function CartTable({ cart }: { cart?: Cart }) {
                             }
                           });
                         }}
-                      >
-                        {isPending ? (
-                          <Loader className="h-4 w-4 animate-spin" />
-                        ) : (
-                          <Plus />
-                        )}
-                      </Button>
+                        isAddButton={true}
+                      />
                     </TableCell>
                     <TableCell className="text-right">
                       {formatCurrency(item.price)}
@@ -117,6 +107,35 @@ export function CartTable({ cart }: { cart?: Cart }) {
               </TableBody>
             </Table>
           </div>
+          <Card>
+            <CardContent className="gap-4 p-4">
+              <div className="pb-4 text-xl">
+                Subtotal (
+                {cart.items.reduce(
+                  (accumulator, item) => accumulator + item.quantity,
+                  0,
+                )}
+                ):
+                <span className="font-bold">
+                  {formatCurrency(cart.itemsPrice)}
+                </span>
+              </div>
+              <Button
+                className="w-full"
+                disabled={isPending}
+                onClick={() =>
+                  startTransition(() => router.push('/shipping-address'))
+                }
+              >
+                {isPending ? (
+                  <Loader className="h-4 w-4 animate-spin" />
+                ) : (
+                  <ArrowRight className="h-4 w-4" />
+                )}{' '}
+                Proceed to Checkout
+              </Button>
+            </CardContent>
+          </Card>
         </div>
       )}
     </>
