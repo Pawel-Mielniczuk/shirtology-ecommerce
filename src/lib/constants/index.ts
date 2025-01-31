@@ -5,3 +5,11 @@ export const SERVER_URL =
   process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3001';
 
 export const LATEST_PRODUCTS_LIMIT = 4;
+
+export const shippingAddressDefaultValues = {
+  fullName: '',
+  streetAddress: '',
+  city: '',
+  postalCode: '',
+  country: '',
+};
