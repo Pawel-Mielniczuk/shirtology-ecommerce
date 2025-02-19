@@ -102,9 +102,10 @@ export async function updateUserAddress(data: ShippingAddress) {
     if (!currentUser) throw new Error('user not found');
 
     const address = shippingAddressSchema.parse(data);
+
     await prisma.user.update({
       where: { id: currentUser.id },
-      data: address,
+      data: { address },
     });
 
     return { success: true, message: 'User updates successfully' };
