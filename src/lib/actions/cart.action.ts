@@ -34,9 +34,9 @@ export async function addItemToCart(data: CartItem) {
   try {
     //Check for cart cookie
     const cookiesInstance = await cookies();
-    const sessionCardId = cookiesInstance.get('sessionCartId')?.value;
+    const sessionCartId = cookiesInstance.get('sessionCartId')?.value;
 
-    if (!sessionCardId) {
+    if (!sessionCartId) {
       throw new Error('Cart session not found');
     }
 
@@ -102,7 +102,7 @@ export async function addItemToCart(data: CartItem) {
       const newCart = insertCartSchema.parse({
         userId: userId,
         items: [item],
-        sessionCardId,
+        sessionCartId,
         ...calcPrice([item]),
       });
 
@@ -131,7 +131,7 @@ export async function getMyCart() {
   // Check for cart cookie
   const cookiesInstance = await cookies();
   const sessionCartId = cookiesInstance.get('sessionCartId')?.value;
-  console.log('sessionCartId', sessionCartId);
+
   if (!sessionCartId) throw new Error('Cart session not found');
 
   // Get session and user ID
